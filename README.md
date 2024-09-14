@@ -7,11 +7,12 @@ This is a simple quiz app that allows users to answer questions and get their sc
 1. Clone the repository
 2. Go to the `quiz-app` directory
 3. Go to the `backend` directory
-4. Run `mvn spring-boot:run` to start the backend server (Make sure you have Maven & Java installed)
-5. Go to the `frontend` directory
-6. Run `npm install` to install dependencies
-7. Run `npm run dev` to start the frontend server
-8. Open your browser and go to [http://localhost:5173](http://localhost:5173)
+4. Add env variables to `.env` file
+5. Run `mvn spring-boot:run` to start the backend server (Make sure you have Maven & Java installed)
+6. Go to the `frontend` directory
+7. Run `npm install` to install dependencies
+8. Run `npm run dev` to start the frontend server
+9. Open your browser and go to [http://localhost:5173](http://localhost:5173)
 
 ## If you like this project, please give it a 🌟.
 
