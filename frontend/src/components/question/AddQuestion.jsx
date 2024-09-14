@@ -65,7 +65,7 @@ const AddQuestion = () => {
         questionType,
         choices,
         correctAnswers: correctAnswers.map((answer) => {
-          const choiceLetter = answer.charAt(0).toUpperCase();
+          const choiceLetter = answer.charAt(0);
           const choiceIndex = choiceLetter.charCodeAt(0) - 65;
           return choiceIndex >= 0 && choiceIndex < choices.length
             ? choiceLetter

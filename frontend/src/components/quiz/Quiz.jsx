@@ -45,7 +45,6 @@ const Quiz = () => {
           id: questionId,
           answer: selectedAnswer,
         };
-        console.log(updatedAnswers);
         return updatedAnswers;
       } else {
         const newAnswer = { id: questionId, answer: selectedAnswer };
@@ -92,7 +91,6 @@ const Quiz = () => {
           id: questionId,
           answer: newAnswer,
         };
-        console.log(updatedAnswers);
         return updatedAnswers;
       } else {
         const newAnswer = { id: questionId, answer: [selectedAnswer] };
@@ -131,7 +129,6 @@ const Quiz = () => {
   const handleNextQuestion = () => {
     if (currentQuestionIndex < quizQuestions.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      console.log(selectedAnswers);
     } else {
       handleSubmit();
     }
