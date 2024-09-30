@@ -14,6 +14,12 @@ This is a simple quiz app that allows users to answer questions and get their sc
 8. Run `npm run dev` to start the frontend server
 9. Open your browser and go to [http://localhost:5173](http://localhost:5173)
 
+## Contributor
+
+<a href = "https://github.com/Krish-Depani/quiz-app/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo=Krish-Depani/quiz-app"/>
+</a>
+
 ## If you like this project, please give it a 🌟.
 
 ## Thank you 😊.
