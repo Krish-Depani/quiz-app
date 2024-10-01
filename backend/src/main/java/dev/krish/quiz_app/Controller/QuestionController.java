@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class QuestionController {
     private final QuestionServiceImpl questionService;
 
     @PostMapping("/create-new-question")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Question> createQuestion(@Valid @RequestBody Question question){
         Question createdQuestion = questionService.createQuestion(question);
         return ResponseEntity.status(CREATED).body(createdQuestion);
@@ -45,6 +47,7 @@ public class QuestionController {
     }
 
     @PutMapping("/question/{id}/update")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Question> updateQuestion(
             @PathVariable Long id, @RequestBody Question question) throws ChangeSetPersister.NotFoundException {
         Question updatedQuestion = questionService.updateQuestion(id, question);
@@ -52,10 +55,12 @@ public class QuestionController {
     }
 
     @DeleteMapping("/question/{id}/delete")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Void> deleteQuestion(@PathVariable Long id){
         questionService.deleteQuestion(id);
         return ResponseEntity.noContent().build();
     }
+
     @GetMapping("/subjects")
     public ResponseEntity<List<String>> getAllSubjects(){
         List<String> subjects = questionService.getAllSubjects();
@@ -74,5 +79,4 @@ public class QuestionController {
         List<Question> randomQuestions = mutableQuestions.subList(0, availableQuestions);
         return ResponseEntity.ok(randomQuestions);
     }
-
 }
