@@ -304,7 +304,7 @@ Response:
 5. Test getting questions, updating, and deleting with both admin and user tokens to verify that only admin can modify questions while both can view them
 6. Test fetching questions for a quiz using the fetch-questions-for-user API
 
-## Contributor
+## Contributors 
 
 <a href = "https://github.com/Krish-Depani/quiz-app/graphs/contributors">
   <img src = "https://contrib.rocks/image?repo=Krish-Depani/quiz-app"/>
