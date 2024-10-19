@@ -8,59 +8,70 @@ const AnswerOptions = ({
 }) => {
   if (!question) {
     return (
-      <div>
-        No questions available, <br /> you may try agian by reducing your
-        requested number of questions on this topic
+      <div className="alert alert-warning">
+        No questions available. You may try again by reducing your requested
+        number of questions on this topic.
       </div>
     );
   }
 
-  const { id, questionType, choices } = question;
+  const { id, questionType, choices = [], correctAnswers } = question; // Default choices to an empty array
+  const isSingleChoice = correctAnswers?.length === 1;
 
-  if (questionType === "single") {
+  if (choices.length === 0) {
     return (
-      <div>
-        {choices.sort().map((choice, index) => (
-          <div key={choice} className="form-check mb-3">
-            <input
-              className="form-check-input"
-              type="radio"
-              id={choice}
-              name={question.id}
-              value={choice}
-              checked={isChecked(question.id, choice)}
-              onChange={() => handleAnswerChange(id, choice)}
-            />
-            <label htmlFor={choice} className="form-check-label ms-2">
-              {choice}
-            </label>
-          </div>
-        ))}
+      <div className="alert alert-info">
+        No answer choices available for this question.
       </div>
     );
-  } else if (questionType === "Multiple Choice") {
+  }
+
+  if (isSingleChoice) {
     return (
-      <div>
-        {choices.sort().map((choice, index) => (
-          <div key={choice} className="form-check mb-3">
+      <div className="options-container">
+        {choices.map((choice, index) => (
+          <div key={index} className="form-check mb-3">
             <input
+              type="radio"
+              id={`choice-${id}-${index}`}
+              name={`question-${id}`}
               className="form-check-input"
-              type="checkbox"
-              id={choice}
-              name={question.id}
               value={choice}
-              checked={isChecked(question.id, choice)}
-              onChange={() => handleCheckboxChange(id, choice)}
+              checked={isChecked(id, choice)}
+              onChange={() => handleAnswerChange(id, choice)}
             />
-            <label htmlFor={choice} className="form-check-label ms-2">
-              {choice}
+            <label
+              className="form-check-label ms-2"
+              htmlFor={`choice-${id}-${index}`}
+            >
+              {`${String.fromCharCode(65 + index)}. ${choice}`}
             </label>
           </div>
         ))}
       </div>
     );
   } else {
-    return null;
+    return (
+      <div className="options-container">
+        {choices.map((choice, index) => (
+          <div key={index} className="form-check mb-3">
+            <input
+              type="checkbox"
+              id={`choice-${id}-${index}`}
+              className="form-check-input"
+              checked={isChecked(id, choice)}
+              onChange={() => handleCheckboxChange(id, choice)}
+            />
+            <label
+              className="form-check-label ms-2"
+              htmlFor={`choice-${id}-${index}`}
+            >
+              {`${String.fromCharCode(65 + index)}. ${choice}`}
+            </label>
+          </div>
+        ))}
+      </div>
+    );
   }
 };
 

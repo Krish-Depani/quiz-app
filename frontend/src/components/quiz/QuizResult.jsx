@@ -1,29 +1,57 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const QuizResult = () => {
   const location = useLocation();
-  const { quizQuestions, totalScores } = location.state;
+  const navigate = useNavigate();
+  const { quizQuestions, totalScores } = location.state || {
+    quizQuestions: [],
+    totalScores: 0,
+  };
   const numQuestions = quizQuestions.length;
   const percentage = Math.round((totalScores / numQuestions) * 100);
 
+  // Redirect to quiz stepper if accessed directly without quiz data
+  React.useEffect(() => {
+    if (!location.state) {
+      navigate("/quiz-stepper");
+    }
+  }, [location.state, navigate]);
+
   const handleRetakeQuiz = () => {
-    alert("Oops! this functionality was not implemented!!!");
+    navigate("/quiz-stepper");
   };
 
   return (
-    <section className="container mt-5">
-      <h3>Your Quiz Result Summary</h3>
-      <hr />
-      <h5 className="text-info">
-        You answered {totalScores} out of {numQuestions} questions correctly.
-      </h5>
-      <p>Your total score is {percentage}%.</p>
-
-      <button className="btn btn-primary btn-sm" onClick={handleRetakeQuiz}>
-        Retake this quiz
-      </button>
-    </section>
+    <div className="container mt-5">
+      <div className="card">
+        <div className="card-header text-center">
+          <h2>Your Quiz Result Summary</h2>
+        </div>
+        <div className="card-body text-center">
+          <h4 className="card-title mb-4">
+            You answered {totalScores} out of {numQuestions} questions
+            correctly.
+          </h4>
+          <h3
+            className={`mb-4 ${
+              percentage >= 50 ? "text-success" : "text-danger"
+            }`}
+          >
+            Your total score is {percentage}%
+          </h3>
+          <div className="d-flex justify-content-center gap-3">
+            <button onClick={handleRetakeQuiz} className="btn btn-primary">
+              Take Another Quiz
+            </button>
+            <Link to="/" className="btn btn-secondary">
+              Back to Home
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
