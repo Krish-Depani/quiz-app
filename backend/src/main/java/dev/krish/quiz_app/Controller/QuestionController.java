@@ -16,7 +16,6 @@ import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
-@CrossOrigin("http://localhost:5173")
 @RestController
 @RequestMapping("/api/quizzes")
 @RequiredArgsConstructor
